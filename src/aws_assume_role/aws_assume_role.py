@@ -138,8 +138,11 @@ def get_options():
 
 
 def get_config():
-    if os.path.isfile('onelogin.aws.json'):
-        json_data = open('onelogin.aws.json').read()
+    aws_config_file = 'onelogin.aws.json'
+    if not os.path.isfile(aws_config_file):
+	aws_config_file = os.path.expanduser('~/.aws/onelogin.aws.json')
+    if os.path.isfile(aws_config_file):
+        json_data = open(aws_config_file).read()
         return json.loads(json_data)
 
 
@@ -152,8 +155,11 @@ def get_client(options):
         client_secret = options.client_secret
         region = options.region
     else:
-        if os.path.isfile('onelogin.sdk.json'):
-            json_data = open('onelogin.sdk.json').read()
+	sdk_file = 'onelogin.sdk.json'
+	if not os.path.isfile(sdk_file):
+	    sdk_file = os.path.expanduser('~/.aws/onelogin.sdk.json')
+        if os.path.isfile(sdk_file):
+            json_data = open(sdk_file).read()
             data = json.loads(json_data)
             if 'client_id' in data.keys() and 'client_secret' in data.keys():
                 client_id = data['client_id']
