@@ -140,7 +140,7 @@ def get_options():
 def get_config():
     aws_config_file = 'onelogin.aws.json'
     if not os.path.isfile(aws_config_file):
-    aws_config_file = os.path.expanduser('~/.aws/onelogin.aws.json')
+        aws_config_file = os.path.expanduser('~/.aws/onelogin.aws.json')
     if os.path.isfile(aws_config_file):
         json_data = open(aws_config_file).read()
         return json.loads(json_data)
